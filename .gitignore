@@ -1,3 +1,7 @@
+.idea
+init_db.py
+schema.sql
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -127,8 +131,3 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-
-.idea
-
-init_db.py
-schema.sql
