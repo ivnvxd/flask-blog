@@ -27,7 +27,7 @@
                 <h3 class="post-subtitle">{{ post['title'] }}</h3>
             </a>
             <p class="post-meta">
-                Posted by <!-- {{ post['user'] }} --> on {{ post['created'] }}
+                Posted by <!-- TODO: {{ post['user'] }} --> on {{ post['created'] }}
             </p>
             <hr>
             <a href="{{ url_for('edit', id=post['id']) }}">
