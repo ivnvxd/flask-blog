@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 
 {% block title %}
-    {{ post['title'] }}
+    {{ post.title }}
 {% endblock %}
 
 {% block background %}
@@ -9,11 +9,13 @@
 {% endblock %}
 
 {% block header %}
-    <h1>Registration</h1>
-    <span class="subheading">Please enter your username and password below</span>
+    <h1>{{ post.title }}</h1>
+    <span class="subheading">{{ post.subtitle }}</span>
+    <span class="meta">Posted by {{ post.title }} on {{ post.created.strftime('%B %d, %Y') }}</span>
 {% endblock %}
 
 {% block main %}
-    <span class="badge bg-primary">{{ post['created'] }}</span>
-    <p>{{ post['content'] }}</p>
+    <div class="container mb-5">
+        {{ post.content|safe }}
+    </div>
 {% endblock %}

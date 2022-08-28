@@ -16,16 +16,16 @@
 {% block main %}
     {% for post in posts %}
         <div class="post-preview">
-            <a href="{{ url_for('post', post_id=post['id']) }}">
-                <h2 class="post-title">{{ post['title'] }}</h2>
-                <h3 class="post-subtitle">{{ post['title'] }}</h3>
+            <a href="{{ url_for('post', post_id=post.id) }}">
+                <h2 class="post-title">{{ post.title }}</h2>
+                <h3 class="post-subtitle">{{ post.subtitle }}</h3>
             </a>
             <p class="post-meta">
                 <!-- TODO: add user to posts -->
-                Posted by <!--  {{ post['user'] }} --> on {{ post['created'] }}
+                Posted by {{ post.title }} on {{ post.created.strftime('%B %d, %Y') }}
             </p>
             <hr>
-            <a href="{{ url_for('edit', id=post['id']) }}">
+            <a href="{{ url_for('post', post_id=post.id) }}">
                 <span class="badge bg-info">Edit</span>
             </a>
             <!-- Divider-->

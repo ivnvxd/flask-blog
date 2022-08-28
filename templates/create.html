@@ -14,21 +14,22 @@
 {% endblock %}
 
 {% block main %}
-    <form method="post">
-        <div class="form-group">
+    <form action="{{ url_for('create') }}" method="post">
+        <div class="form-floating">
+            <input class="form-control" id="title" name="title" type="text" placeholder="Please enter a title..." />
             <label for="title">Title</label>
-            <input type="text" name="title"
-                   placeholder="Post title" class="form-control"
-                   value="{{ request.form['title'] }}">
+        </div>
+        <div class="form-floating">
+            <input class="form-control" id="subtitle" name="subtitle" type="text" placeholder="Please enter a subtitle..." />
+            <label for="subtitle">Subtitle</label>
+        </div>
+        <div class="form-floating">
+            <textarea class="form-control" id="content" name="content" placeholder="Enter post content here..." style="height: 15rem"></textarea>
+            <label for="content">Post Content</label>
         </div>
 
-        <div class="form-group">
-            <label for="content">Content</label>
-            <textarea name="content" placeholder="Post content"
-                      class="form-control">{{ request.form['content'] }}</textarea>
-        </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
+        <br />
+
+        <button class="btn btn-primary text-uppercase mb-5" id="submitButton" type="submit">Send</button>
     </form>
 {% endblock %}
