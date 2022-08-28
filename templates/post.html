@@ -1,7 +1,19 @@
-{% extends 'base.html' %}
+{% extends 'layout.html' %}
 
-{% block content %}
-    <h2>{% block title %} {{ post['title'] }} {% endblock %}</h2>
-    <span class="badge badge-primary">{{ post['created'] }}</span>
+{% block title %}
+    {{ post['title'] }}
+{% endblock %}
+
+{% block background %}
+    <header class="masthead" style="background-image: url('/static/img/post-bg.jpg')">
+{% endblock %}
+
+{% block header %}
+    <h1>Registration</h1>
+    <span class="subheading">Please enter your username and password below</span>
+{% endblock %}
+
+{% block main %}
+    <span class="badge bg-primary">{{ post['created'] }}</span>
     <p>{{ post['content'] }}</p>
 {% endblock %}

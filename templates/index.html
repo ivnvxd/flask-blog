@@ -4,19 +4,13 @@
     Welcome to FlaskBlog
 {% endblock %}
 
+{% block background %}
+    <header class="masthead" style="background-image: url('/static/img/home-bg.jpg')">
+{% endblock %}
+
 {% block header %}
-    <header class="masthead" style="background-image: url('static/img/home-bg.jpg')">
-            <div class="container position-relative px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-md-10 col-lg-8 col-xl-7">
-                        <div class="site-heading">
-                            <h1>FlaskBlog</h1>
-                            <span class="subheading">A simple blog using Flask Python framework</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
+    <h1>FlaskBlog</h1>
+    <span class="subheading">A simple blog using Flask Python framework</span>
 {% endblock %}
 
 {% block main %}
@@ -27,11 +21,12 @@
                 <h3 class="post-subtitle">{{ post['title'] }}</h3>
             </a>
             <p class="post-meta">
-                Posted by <!-- TODO: {{ post['user'] }} --> on {{ post['created'] }}
+                <!-- TODO: add user to posts -->
+                Posted by <!--  {{ post['user'] }} --> on {{ post['created'] }}
             </p>
             <hr>
             <a href="{{ url_for('edit', id=post['id']) }}">
-                <span class="badge badge-warning">Edit</span>
+                <span class="badge bg-info">Edit</span>
             </a>
             <!-- Divider-->
             <hr class="my-4" />

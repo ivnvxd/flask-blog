@@ -1,32 +1,41 @@
-{% extends 'base.html' %}
+{% extends "layout.html" %}
 
-{% block content %}
-<h1>{% block title %} Edit "{{ post['title'] }}" {% endblock %}</h1>
+{% block title %}
+    Edit "{{ post['title'] }}"
+{% endblock %}
 
-<form method="post">
-    <div class="form-group">
-        <label for="title">Title</label>
-        <input type="text" name="title" placeholder="Post title"
-               class="form-control"
-               value="{{ request.form['title'] or post['title'] }}">
-        </input>
-    </div>
+{% block background %}
+    <header class="masthead" style="background-image: url('/static/img/post-bg.jpg')">
+{% endblock %}
 
-    <div class="form-group">
-        <label for="content">Content</label>
-        <textarea name="content" placeholder="Post content"
-                  class="form-control">{{ request.form['content'] or post['content'] }}</textarea>
-    </div>
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
-</form>
-<hr>
+{% block header %}
+    <h1>{{ post['title'] }}</h1>
+    <span class="subheading">Edit "{{ post['title'] }}"</span>
+{% endblock %}
 
-<form action="{{ url_for('delete', id=post['id']) }}" method="POST">
-    <input type="submit" value="Delete Post"
-            class="btn btn-danger btn-sm"
-            onclick="return confirm('Are you sure you want to delete this post?')">
-</form>
+{% block main %}
+    <form method="post">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" name="title" placeholder="Post title"
+                   class="form-control"
+                   value="{{ request.form['title'] or post['title'] }}">
 
+        </div>
+
+        <div class="form-group">
+            <label for="content">Content</label>
+            <textarea name="content" placeholder="Post content"
+                      class="form-control">{{ request.form['content'] or post['content'] }}</textarea>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary d-flex justify-content-end mx-auto mb-5 text-uppercase">Submit</button>
+        </div>
+    </form>
+
+    <form action="{{ url_for('delete', id=post['id']) }}" method="POST">
+        <input type="submit" value="Delete Post"
+                class="btn btn-danger btn-sm d-flex justify-content-end mx-auto mb-5 text-uppercase"
+                onclick="return confirm('Are you sure you want to delete this post?')">
+    </form>
 {% endblock %}
