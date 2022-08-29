@@ -4,32 +4,32 @@
     Settings
 {% endblock %}
 
+{% block background %}
+    <header class="masthead" style="background-image: url('/static/img/post-bg.jpg')">
+{% endblock %}
+
 {% block header %}
-    <header class="masthead" style="background-image: url('static/img/home-bg.jpg')">
-            <div class="container position-relative px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-md-10 col-lg-8 col-xl-7">
-                        <div class="site-heading">
-                            <h1>Settings</h1>
-                            <span class="subheading">You can change your password here</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
+    <h1>Settings</h1>
+    <span class="subheading">You can change your password here</span>
 {% endblock %}
 
 {% block main %}
-    <form action="/settings" method="post">
-        <div class="mb-3">
-            <input autofocus class="form-control mx-auto w-auto" id="current_password" name="current_password" placeholder="Current password" type="password">
+    <form action="{{ url_for('settings') }}" method="post">
+        <div class="form-floating">
+            <input autocomplete="off" class="form-control" id="current_password" name="current_password" placeholder="Current password" type="password" value="{{ request.form['current_password'] }}">
+            <label for="title">Current password</label>
         </div>
-        <div class="mb-3">
-            <input class="form-control mx-auto w-auto" id="new_password" name="new_password" placeholder="New password" type="password">
+        <div class="form-floating">
+            <input autocomplete="off" class="form-control" id="new_password" name="new_password" placeholder="New password" type="password" value="{{ request.form['new_password'] }}">
+            <label for="subtitle">New password</label>
         </div>
-        <div class="mb-5">
-            <input class="form-control mx-auto w-auto" id="confirmation" name="confirmation" placeholder="New password (again)" type="password">
+        <div class="form-floating">
+            <input autocomplete="off" class="form-control" id="confirmation" name="confirmation" placeholder="New password (again)" type="password" value="{{ request.form['confirmation'] }}">
+            <label for="subtitle">New password (again)</label>
         </div>
-        <button class="btn btn-primary d-flex justify-content-end mx-auto mb-5 text-uppercase" type="submit">Change password</button>
+
+        <br />
+
+        <button class="btn btn-primary text-uppercase mb-5" id="submitButton" type="submit">Change password</button>
     </form>
 {% endblock %}

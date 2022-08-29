@@ -4,29 +4,28 @@
     Log In
 {% endblock %}
 
+{% block background %}
+    <header class="masthead" style="background-image: url('/static/img/post-bg.jpg')">
+{% endblock %}
+
 {% block header %}
-    <header class="masthead" style="background-image: url('static/img/home-bg.jpg')">
-            <div class="container position-relative px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-md-10 col-lg-8 col-xl-7">
-                        <div class="site-heading">
-                            <h1>Log In</h1>
-                            <span class="subheading">Please enter your username and password below</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
+    <h1>Log In</h1>
+    <span class="subheading">Please enter your username and password below</span>
 {% endblock %}
 
 {% block main %}
-    <form action="/login" method="post">
-        <div class="mb-3">
-            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="username" name="username" placeholder="Username" type="text">
+    <form action="{{ url_for('login') }}" method="post">
+        <div class="form-floating">
+            <input autocomplete="off" autofocus class="form-control" id="username" name="username" placeholder="Username" type="text" value="{{ request.form['username'] }}">
+            <label for="title">Username</label>
         </div>
-        <div class="mb-5">
-            <input class="form-control mx-auto w-auto" id="password" name="password" placeholder="Password" type="password">
+        <div class="form-floating">
+            <input autocomplete="off" class="form-control" id="password" name="password" placeholder="Password" type="password" value="{{ request.form['password'] }}">
+            <label for="subtitle">Password</label>
         </div>
-        <button class="btn btn-primary d-flex justify-content-end mx-auto mb-5 text-uppercase" type="submit">Log In</button>
+
+        <br />
+
+        <button class="btn btn-primary text-uppercase mb-5" id="submitButton" type="submit">Log In</button>
     </form>
 {% endblock %}
