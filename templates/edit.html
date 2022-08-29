@@ -1,41 +1,35 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Edit "{{ post['title'] }}"
+    Edit "{{ post.title }}"
 {% endblock %}
 
 {% block background %}
-    <header class="masthead" style="background-image: url('/static/img/post-bg.jpg')">
+    <header class="masthead" style="background-image: url('/static/img/contact-bg.jpg')">
 {% endblock %}
 
 {% block header %}
-    <h1>{{ post['title'] }}</h1>
-    <span class="subheading">Edit "{{ post['title'] }}"</span>
+    <h1>Edit "{{ post.title }}"</h1>
+    <span class="subheading">Edit "{{ post.subtitle }}"</span>
 {% endblock %}
 
 {% block main %}
-    <form method="post">
-        <div class="form-group">
+    <form action="{{ url_for('edit', post_id=post.id) }}" method="post">
+        <div class="form-floating">
+            <input autocomplete="off" class="form-control" id="title" name="title" type="text" placeholder="Please enter a title..." value="{{ request.form['title'] or post.title}}">
             <label for="title">Title</label>
-            <input type="text" name="title" placeholder="Post title"
-                   class="form-control"
-                   value="{{ request.form['title'] or post['title'] }}">
-
+        </div>
+        <div class="form-floating">
+            <input autocomplete="off" class="form-control" id="subtitle" name="subtitle" type="text" placeholder="Please enter a subtitle..." value="{{ request.form['subtitle'] or post.subtitle }}">
+            <label for="subtitle">Subtitle</label>
+        </div>
+        <div class="form-floating">
+            <textarea autocomplete="off" class="form-control" id="content" name="content" placeholder="Enter post content here..." style="height: 15rem">{{ request.form['content'] or post.content }}</textarea>
+            <label for="content">Post Content</label>
         </div>
 
-        <div class="form-group">
-            <label for="content">Content</label>
-            <textarea name="content" placeholder="Post content"
-                      class="form-control">{{ request.form['content'] or post['content'] }}</textarea>
-        </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary d-flex justify-content-end mx-auto mb-5 text-uppercase">Submit</button>
-        </div>
-    </form>
+        <br />
 
-    <form action="{{ url_for('delete', id=post['id']) }}" method="POST">
-        <input type="submit" value="Delete Post"
-                class="btn btn-danger btn-sm d-flex justify-content-end mx-auto mb-5 text-uppercase"
-                onclick="return confirm('Are you sure you want to delete this post?')">
+        <button class="btn btn-primary text-uppercase mb-5" id="submitButton" type="submit">Submit</button>
     </form>
 {% endblock %}

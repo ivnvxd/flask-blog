@@ -15,7 +15,28 @@
 {% endblock %}
 
 {% block main %}
-    <div class="container mb-5">
-        {{ post.content|safe }}
+    {{ post.content|safe }}
+
+    <!-- Divider-->
+    <hr class="my-4" />
+
+    <!-- Edit button -->
+    <div class="row mb-5">
+        <div class="col">
+            <a href="{{ url_for('edit', post_id=post.id) }}">
+                <span class="btn btn-info text-uppercase">Edit</span>
+            </a>
+        </div>
+
+        <!-- Delete button -->
+        <div class="col-auto">
+            <form action="{{ url_for('delete', post_id=post.id) }}" method="post">
+
+                <input type="submit" value="Delete" class="btn btn-danger text-uppercase"
+                onclick="return confirm('Are you sure you want to delete this post?')">
+<!--                <span class="btn btn-danger text-uppercase" onclick="return confirm('Are you sure you want to delete this post?')">Delete</span>-->
+
+                </form>
+        </div>
     </div>
 {% endblock %}

@@ -24,12 +24,12 @@
                 <!-- TODO: add user to posts -->
                 Posted by {{ post.title }} on {{ post.created.strftime('%B %d, %Y') }}
             </p>
-            <hr>
-            <a href="{{ url_for('post', post_id=post.id) }}">
-                <span class="badge bg-info">Edit</span>
-            </a>
             <!-- Divider-->
             <hr class="my-4" />
         </div>
     {% endfor %}
+
+    <!-- Pager-->
+    <!-- TODO: add pager -->
+<!--    <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div>-->
 {% endblock %}
