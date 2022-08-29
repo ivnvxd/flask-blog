@@ -16,12 +16,12 @@
 {% block main %}
     <form action="{{ url_for('login') }}" method="post">
         <div class="form-floating">
-            <input autocomplete="off" autofocus class="form-control" id="username" name="username" placeholder="Username" type="text" value="{{ request.form['username'] }}">
-            <label for="title">Username</label>
+            <input autocomplete="off" class="form-control" id="username" name="username" placeholder="Username" type="text" value="{{ request.form['username'] }}">
+            <label for="username">Username</label>
         </div>
         <div class="form-floating">
             <input autocomplete="off" class="form-control" id="password" name="password" placeholder="Password" type="password" value="{{ request.form['password'] }}">
-            <label for="subtitle">Password</label>
+            <label for="password">Password</label>
         </div>
 
         <br />
