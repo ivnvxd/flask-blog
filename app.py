@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for, flash, redirect, session
+from flask import Flask, render_template, request, flash, redirect, session
 from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -28,6 +28,17 @@ app.config["FLASK_ENV"] = 'development'
 app.config['SECRET_KEY'] = 'KLXH243GssUWwKdTWS8FDhdwYF56wPj6'
 
 
+class User(db.Model):
+    __tablename__ = 'users'
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(50))
+    hash = db.Column(db.String)
+
+    def __init__(self, username, hash):
+        self.username = username
+        self.hash = hash
+
+
 class Post(db.Model):
     __tablename__ = 'posts'
     id = db.Column(db.Integer, primary_key=True)
@@ -45,17 +56,6 @@ class Post(db.Model):
         self.content = content
 
 
-class User(db.Model):
-    __tablename__ = 'users'
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(50))
-    hash = db.Column(db.String)
-
-    def __init__(self, username, hash):
-        self.username = username
-        self.hash = hash
-
-
 @app.after_request
 def after_request(response):
     """Ensure responses aren't cached"""
@@ -68,8 +68,9 @@ def after_request(response):
 @app.route('/')
 def index():
     """Show homepage"""
-    posts = Post.query.order_by(Post.created.desc()).all()
 
+    # Query all posts from db and render homepage
+    posts = db.session.query(Post, User.username).join(User, Post.user_id == User.id).order_by(Post.created.desc()).all()
     return render_template('index.html', posts=posts)
 
 
@@ -82,7 +83,7 @@ def create():
     if request.method == "POST":
 
         # Get user input
-        user_id = 1
+        user_id = session["user_id"]
         created = datetime.now()
         title = request.form['title']
         subtitle = request.form['subtitle']
@@ -106,7 +107,7 @@ def create():
             db.session.commit()
 
             # Redirect user to home page
-            flash(f'{post.title} was successfully added!')
+            flash(f'"{post.title}" was successfully added!')
             return redirect('/')
 
     # User reached route via GET (as by clicking a link or via redirect)
@@ -124,9 +125,9 @@ def about():
 def post(post_id):
     """Show post"""
 
-    # Get post from db and render post page
-    post = Post.query.filter_by(id=post_id).one()
-    return render_template('post.html', post=post)
+    # Query post from db and render post page
+    post = db.session.query(Post, User.username).join(User, Post.user_id == User.id).filter(Post.id == post_id).one()
+    return render_template('post.html', post=post, session=session)
 
 
 @app.route('/post/<int:post_id>/edit', methods=('GET', 'POST'))
@@ -134,23 +135,23 @@ def post(post_id):
 def edit(post_id):
     """Edit post"""
 
-    post = Post.query.filter_by(id=post_id).one()
+    post = db.session.query(Post, User.username).join(User, Post.user_id == User.id).filter(Post.id == post_id).one()
 
     # User reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
-        post.title = request.form['title']
-        post.subtitle = request.form['subtitle']
-        post.content = request.form['content']
-        post.user_id = 1
+        post[0].title = request.form['title']
+        post[0].subtitle = request.form['subtitle']
+        post[0].content = request.form['content']
+        post[0].user_id = session["user_id"]
 
         # Ensure all fields were submitted
-        if not post.title:
+        if not post[0].title:
             flash('Title is required!')
             return render_template('edit.html', post=post)
-        elif not post.subtitle:
+        elif not post[0].subtitle:
             flash('Subtitle is required!')
             return render_template('edit.html', post=post)
-        elif not post.content:
+        elif not post[0].content:
             flash('Post content is required!')
             return render_template('edit.html', post=post)
 
@@ -159,12 +160,19 @@ def edit(post_id):
             db.session.commit()
 
             # Redirect user to home page
-            flash(f'{post.title} was successfully edited!')
+            flash(f'{post[0].title} was successfully edited!')
             return redirect('/')
 
     # User reached route via GET (as by clicking a link or via redirect)
     else:
-        return render_template('edit.html', post=post)
+        # Render edit page if correct user logged in
+        if session["user_id"] == post[0].user_id:
+            return render_template('edit.html', post=post)
+
+        # Redirect to homepage if not author is logged in
+        else:
+            flash(f'You are not allowed to edit "{post[0].title}"')
+            return redirect("/")
 
 
 @app.route('/post/<int:post_id>/delete', methods=('POST', ))
@@ -182,7 +190,7 @@ def delete(post_id):
         db.session.commit()
 
         # Redirect user to home page
-        flash(f'{post.title} was successfully deleted!')
+        flash(f'"{post.title}" was successfully deleted!')
         return redirect('/')
 
 
@@ -232,7 +240,7 @@ def register():
         session["user_id"] = user.id
 
         # Redirect user to home page
-        flash(f'You have been registered as {user.username}')
+        flash(f'You have been registered as "{user.username}"')
         return redirect("/")
 
     # User reached route via GET (as by clicking a link or via redirect)
@@ -273,7 +281,7 @@ def login():
         session["user_id"] = user.id
 
         # Redirect user to home page
-        flash(f'You have logged in as {user.username}')
+        flash(f'You have logged in as "{user.username}"')
         return redirect('/')
 
     # User reached route via GET (as by clicking a link or via redirect)
