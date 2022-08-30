@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Edit "{{ post.title }}"
+    Edit "{{ post[0].title }}"
 {% endblock %}
 
 {% block background %}
@@ -9,22 +9,24 @@
 {% endblock %}
 
 {% block header %}
-    <h1>Edit "{{ post.title }}"</h1>
-    <span class="subheading">Edit "{{ post.subtitle }}"</span>
+    <h1>Edit "{{ post[0].title }}"</h1>
+    <span class="subheading">Edit "{{ post[0].subtitle }}"</span>
+    <!-- TODO: add user to posts -->
+    <span class="meta">Posted by {{ post[1] }} on {{ post[0].created.strftime('%B %d, %Y') }}</span>
 {% endblock %}
 
 {% block main %}
-    <form action="{{ url_for('edit', post_id=post.id) }}" method="post">
+    <form action="{{ url_for('edit', post_id=post[0].id) }}" method="post">
         <div class="form-floating">
-            <input autocomplete="off" class="form-control" id="title" name="title" type="text" placeholder="Please enter a title..." value="{{ request.form['title'] or post.title}}">
+            <input autocomplete="off" class="form-control" id="title" name="title" type="text" placeholder="Please enter a title..." value="{{ request.form['title'] or post[0].title}}">
             <label for="title">Title</label>
         </div>
         <div class="form-floating">
-            <input autocomplete="off" class="form-control" id="subtitle" name="subtitle" type="text" placeholder="Please enter a subtitle..." value="{{ request.form['subtitle'] or post.subtitle }}">
+            <input autocomplete="off" class="form-control" id="subtitle" name="subtitle" type="text" placeholder="Please enter a subtitle..." value="{{ request.form['subtitle'] or post[0].subtitle }}">
             <label for="subtitle">Subtitle</label>
         </div>
         <div class="form-floating">
-            <textarea autocomplete="off" class="form-control" id="content" name="content" placeholder="Enter post content here..." style="height: 15rem">{{ request.form['content'] or post.content }}</textarea>
+            <textarea autocomplete="off" class="form-control" id="content" name="content" placeholder="Enter post content here..." style="height: 15rem">{{ request.form['content'] or post[0].content }}</textarea>
             <label for="content">Post Content</label>
         </div>
 
