@@ -19,15 +19,5 @@ CREATE TABLE posts (
     content TEXT NOT NULL
 );
 
---CREATE TABLE posts (
---    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
---    user_id INTEGER NOT NULL,
---    username TEXT NOT NULL,
---    created TIMESTAMP NOT NULL,
---    title TEXT NOT NULL,
---    subtitle TEXT NOT NULL,
---    content TEXT NOT NULL
---);
-
 CREATE UNIQUE INDEX id
     ON posts (id);
