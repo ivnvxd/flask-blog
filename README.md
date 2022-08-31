@@ -30,7 +30,7 @@ Database is built on [SQLite](https://sqlite.org/). All DB Management is done wi
 
 6. To reinitialize sample database run `$ python init_db.py` from `tmp` folder. 
 
-### Tech used
+## Tech used
 * Python 3
 * Flask 2.2.2
 * SQLite 3
