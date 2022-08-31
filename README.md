@@ -12,7 +12,7 @@ FlaskBlog is a simple web app made with Flask on top of [Clean Blog](https://sta
 It is a lightweight multi-user web blog using Python and [Flask](https://flask.palletsprojects.com/)<br />
 
 Application users if they are not logged in can **view all the posts** in database and **view the full content** of the posts. They also have the option to **register** using their username and password.<br />
-Registered and authorized users can **add new blog posts**, **edit** or **delete** existing ones (only authored by them), **log out** or **change their password**.
+Registered and authorized users can **add new** blog posts, **edit** or **delete** existing ones (only authored by them), **log out** or **change their password**.
 
 Database is built on [SQLite](https://sqlite.org/). All DB Management is done with [SQLAlchemy](https://www.sqlalchemy.org/). [Jinja](http://jinja.palletsprojects.com/) template engine is used to dynamically build HTML pages.
 
