@@ -14,7 +14,14 @@
 {% endblock %}
 
 {% block main %}
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe nostrum ullam eveniet pariatur voluptates odit, fuga atque ea nobis sit soluta odio, adipisci quas excepturi maxime quae totam ducimus consectetur?</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius praesentium recusandae illo eaque architecto error, repellendus iusto reprehenderit, doloribus, minus sunt. Numquam at quae voluptatum in officia voluptas voluptatibus, minus!</p>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut consequuntur magnam, excepturi aliquid ex itaque esse est vero natus quae optio aperiam soluta voluptatibus corporis atque iste neque sit tempora!</p>
+    <p>
+        FlaskBlog is a lightweight multi-user web blog made using <a href="https://www.python.org/">Python</a> and <a href="https://flask.palletsprojects.com/">Flask</a> on top of <a href="https://startbootstrap.com/theme/clean-blog/">Clean Blog</a> theme by <a href="https://startbootstrap.com/">Start Bootstrap</a>.
+    </p>
+    <p>
+        Application users if they are not logged in can <b>view all the posts</b> in database and <b>view the full content</b> of the posts. They also have the option to <b>register</b> using their username and password.<br />
+        Registered and authorized users can <b>add new</b> blog posts, <b>edit</b> or <b>delete</b> existing ones (only authored by them), <b>log out</b> or <b>change their password</b>.
+    </p>
+    <p>
+        Database is built on <a href="https://sqlite.org/">SQLite</a>. All DB Management is done with <a href="https://www.sqlalchemy.org/">SQLAlchemy</a>. <a href="http://jinja.palletsprojects.com/">Jinja</a> template engine is used to dynamically build HTML pages.
+    </p>
 {% endblock %}
