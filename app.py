@@ -303,10 +303,10 @@ def settings():
 
         # Ensure all fields were submitted
         if not current_password:
-            flash('Must provide current_password')
+            flash('Must provide current password')
             return render_template('settings.html')
         elif not new_password:
-            flash('Must provide new_password')
+            flash('Must provide new password')
             return render_template('settings.html')
         elif not confirmation:
             flash('Must provide confirmation')
