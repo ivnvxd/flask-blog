@@ -1,7 +1,4 @@
 # FlaskBlog
-![GitHub top language](https://img.shields.io/github/languages/top/venyxD/flask-blog)
-![GitHub language count](https://img.shields.io/github/languages/count/venyxd/flask-blog)
-![GitHub repo size](https://img.shields.io/github/repo-size/venyxd/flask-blog)
 ![GitHub](https://img.shields.io/github/license/venyxd/flask-blog)
 ![GitHub last commit](https://img.shields.io/github/last-commit/venyxd/flask-blog)
 
@@ -18,11 +15,11 @@ Database is built on [SQLite](https://sqlite.org/). All DB Management is done wi
 
 ## Usage
 1. Clone this repository using: `git clone https://github.com/venyxD/flask-blog.git` <br />
-2. Go to the project root directory and install the virtualenv library using pip and create a virtual environment. Run the following commands respectively:
+2. Optional: Go to the project root directory and install the virtualenv library using pip and create a virtual environment. Run the following commands respectively:
    * `pip install virtualenv`
    * `virtualenv venv`
    * `source venv/bin/activate`
-3. Download the all dependencies in the requirements.txt using `pip install -r requirements.txt`
+3. Download and install all dependencies in the requirements.txt using `pip install -r requirements.txt`
 4. Start Flask’s built-in web server: `$ flask run`
 5. Open your browser and view the app by opening the link http://127.0.0.1:5000/
 
@@ -30,7 +27,7 @@ Database is built on [SQLite](https://sqlite.org/). All DB Management is done wi
 
 6. To reinitialize sample database run `$ python init_db.py` from `tmp` folder. 
 
-## Tech used
+## Tools used
 * Python 3
 * Flask 2.2.2
 * SQLite 3
